@@ -1,16 +1,16 @@
 {
-    "name": "react-persistent-tabs",
+    "name": "react-stateful-tabs",
     "version": "0.0.1",
     "description": "",
     "main": "dist/index.cjs.js",
     "module": "dist/index.es.js",
     "repository": {
         "type": "git",
-        "url": "https://github.com/erictooth/react-persistent-tabs.git"
+        "url": "https://github.com/erictooth/react-stateful-tabs.git"
     },
-    "homepage": "https://github.com/erictooth/react-persistent-tabs/blob/master/README.md",
+    "homepage": "https://github.com/erictooth/react-stateful-tabs/blob/master/README.md",
     "bugs": {
-        "url": "https://github.com/erictooth/react-persistent-tabs/issues"
+        "url": "https://github.com/erictooth/react-stateful-tabs/issues"
     },
     "keywords": [
         "react",
