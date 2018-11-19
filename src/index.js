@@ -95,8 +95,7 @@ function StatefulTabs({ children }) {
     );
 }
 
-// Useful to hide / show instances from within a render method
-StatefulTabs.Instance = React.memo(function StatefulTabsInstance({ id, render, properties }) {
+StatefulTabs.Controller = React.memo(function StatefulTabsController({ id, render, properties }) {
     const { create, hide } = useContext(StatefulTabsContext);
     useEffect(
         () => {
