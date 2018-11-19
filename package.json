@@ -1,0 +1,77 @@
+{
+    "name": "react-persistent-tabs",
+    "version": "0.0.1",
+    "description": "",
+    "main": "dist/index.cjs.js",
+    "module": "dist/index.es.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/erictooth/react-persistent-tabs.git"
+    },
+    "homepage": "https://github.com/erictooth/react-persistent-tabs/blob/master/README.md",
+    "bugs": {
+        "url": "https://github.com/erictooth/react-persistent-tabs/issues"
+    },
+    "keywords": [
+        "react",
+        "state",
+        "tabs"
+    ],
+    "sideEffects": false,
+    "scripts": {
+        "build": "npm run lint && npm run build:js ",
+        "build:flow": "flow check && flow-copy-source src dist && cp dist/index.js.flow dist/index.cjs.js.flow && mv dist/index.js.flow dist/index.es.js.flow",
+        "build:js": "rollup -c rollup.config.js",
+        "flow:coverage": "flow-coverage-report -i src/**/*.js -x 'src/__tests__/**' -t html",
+        "lint": "eslint -c ./.eslintrc.js src/",
+        "test": "jest"
+    },
+    "files": [
+        "dist"
+    ],
+    "jest": {
+        "collectCoverage": true,
+        "setupFiles": [
+            "./test/jestsetup.js"
+        ]
+    },
+    "author": "Eric Mantooth",
+    "license": "MIT",
+    "devDependencies": {
+        "@babel/core": "^7.1.0",
+        "@babel/plugin-proposal-class-properties": "^7.1.0",
+        "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+        "@babel/preset-env": "^7.1.0",
+        "@babel/preset-flow": "^7.0.0",
+        "@babel/preset-react": "^7.0.0",
+        "babel-core": "^7.0.0-bridge.0",
+        "babel-eslint": "^9.0.0",
+        "enzyme": "^3.6.0",
+        "enzyme-adapter-react-16.3": "^1.2.0",
+        "eslint": "^5.6.0",
+        "eslint-config-prettier": "^3.0.1",
+        "eslint-plugin-flowtype": "^2.50.1",
+        "eslint-plugin-import": "^2.14.0",
+        "eslint-plugin-jest": "^21.22.0",
+        "eslint-plugin-prettier": "^2.6.2",
+        "eslint-plugin-react": "^7.11.1",
+        "flow-bin": "^0.86.0",
+        "flow-copy-source": "^2.0.2",
+        "flow-coverage-report": "^0.6.0",
+        "jest": "^23.6.0",
+        "jest-enzyme": "^6.1.2",
+        "prettier": "^1.14.3",
+        "react": "^16.7.0-alpha.0",
+        "react-dom": "^16.7.0-alpha.0",
+        "rollup": "^0.66.1",
+        "rollup-plugin-babel": "^4.0.3",
+        "rollup-plugin-commonjs": "^9.1.8",
+        "rollup-plugin-json": "^3.1.0",
+        "rollup-plugin-node-resolve": "^3.4.0",
+        "sinon": "^4.5.0",
+        "sinon-stub-promise": "^4.0.0"
+    },
+    "peerDependencies": {
+        "react": "^16.7.0-alpha.0"
+    }
+}
