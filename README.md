@@ -80,7 +80,7 @@ const ReachRouterTabController = ({ render, properties, ...routerProps }) => (
   <StatefulTabs.Controller
     id={routerProps.uri}
     properties={properties}
-    render={React.useCallback(() => render(routerProps), [render, routerProps])}
+    render={React.useCallback((tabProps) => render({ ...tabProps, ...routerProps }), [render, routerProps])}
   />
 );
 ```
