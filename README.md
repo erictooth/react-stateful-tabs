@@ -39,7 +39,8 @@ function SomeComponent() {
 
 ##### `render` prop: `(tabProps: {visible: boolean, properties: Object, destroy: () => void, update: (newProperties: Object) => void}) => React.Element` function that returns the component associated with the currently selected `id`
 
-#### `<StatefulTabs.View />` is can be placed anywhere within `<StatefulTabs>` to render the currently selected tab.
+#### `<StatefulTabs.View />`
+Placed anywhere within `<StatefulTabs>` to render the currently selected tab.
 
 ### Usage With React Router
 
