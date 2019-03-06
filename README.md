@@ -2,6 +2,46 @@
 
 ## Usage
 
+### Simple Usage
+
+```jsx
+const tabs = {
+  GENERAL: ({ visible }) => (visible ? <h1>General Tab</h1> : null),
+  ACTIVITIES: ({ visible }) => (visible ? <h1>Activites Tab</h1> : null)
+};
+
+function SomeComponent() {
+  const [currentTab, setCurrentTab] = React.useState("GENERAL");
+
+  return (
+    <StatefulTabs>
+      {() => (
+        <div>
+          <button onClick={() => setCurrentTab("GENERAL")}>General</button>
+          <button onClick={() => setCurrentTab("ACTIVITIES")}>
+            Activities
+          </button>
+          <StatefulTabs.Controller
+            id={currentTab}
+            render={tabProps => React.createElement(tabs[currentTab], tabProps)}
+          />
+          <StatefulTabs.View />
+        </div>
+      )}
+    </StatefulTabs>
+  );
+}
+```
+
+#### `<StatefulTabs.Controller>`
+
+##### `id` prop: `string | number` indicates the currently selected tab. Whenever it changes, it will create a new tab (if that `id` has not yet been opened), or show the existing instance with that id.
+
+##### `render` prop: `(tabProps: {visible: boolean, properties: Object, destroy: () => void, update: (newProperties: Object) => void}) => React.Element` function that returns the component associated with the currently selected `id`
+
+#### Tab View
+`<StatefulTabs.View />` is can be placed anywhere within `<StatefulTabs>` to render the currently selected tab.
+
 ### Usage With React Router
 
 To derive the tab id from the current route URL, you can wrap `StatefulTabs.Controller` with the below component:
