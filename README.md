@@ -2,6 +2,32 @@
 
 ## Usage
 
+### Usage With React Router
+
+To derive the tab id from the current route URL, you can wrap `StatefulTabs.Controller` with the below component:
+
+```jsx
+const ReactRouterTabController = ({ render, properties }) => routerProps => (
+  <StatefulTabs.Controller
+    id={routerProps.match.url}
+    render={() => render(routerProps)}
+  />
+);
+```
+
+And then render it in a React Router `Route`:
+
+```jsx
+<Router>
+    <Route
+      path="/:projectId"
+      render={ReactRouterTabController({
+        render: routerProps => <ProjectView projectId={routerProps.match.params.projectId} />
+      })}
+    />
+</Router>
+```
+
 ### Usage With Reach Router
 
 To derive the tab id from the current route URL, you can wrap `StatefulTabs.Controller` with the below component:
