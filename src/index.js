@@ -59,7 +59,7 @@ const statefulTabsReducer = (state = {}, action) => ({
     activeInstance: activeInstanceReducer(state.activeInstance, action),
 });
 
-const StatefulTabsContext = createContext(statefulTabsReducer(undefined, {}));
+export const StatefulTabsContext = createContext(statefulTabsReducer(undefined, {}));
 
 function usePersistentContext() {
     const [state, dispatch] = useReducer(statefulTabsReducer, statefulTabsReducer(undefined, {}));

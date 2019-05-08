@@ -1,7 +1,7 @@
 {
     "name": "react-stateful-tabs",
-    "version": "0.0.2",
-    "description": "",
+    "version": "0.0.4",
+    "description": "Preserve the internal state of a tab when it’s hidden.",
     "main": "dist/index.cjs.js",
     "module": "dist/index.es.js",
     "repository": {
@@ -61,8 +61,8 @@
         "jest": "^23.6.0",
         "jest-enzyme": "^6.1.2",
         "prettier": "^1.14.3",
-        "react": "^16.7.0-alpha.0",
-        "react-dom": "^16.7.0-alpha.0",
+        "react": "^16.8.0",
+        "react-dom": "^16.8.0",
         "rollup": "^0.66.1",
         "rollup-plugin-babel": "^4.0.3",
         "rollup-plugin-commonjs": "^9.1.8",
