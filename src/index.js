@@ -48,7 +48,10 @@ const activeInstanceReducer = (state = null, action) => {
             return action.id;
         case "DESTROY":
         case "HIDE":
-            return null;
+            if (action.id === state) {
+                return null;
+            }
+            return state;
         default:
             return state;
     }
@@ -97,20 +100,17 @@ function StatefulTabs({ children }) {
 
 StatefulTabs.Controller = React.memo(function StatefulTabsController({ id, render, properties }) {
     const { create, hide } = useContext(StatefulTabsContext);
-    useEffect(
-        () => {
-            if (!id) {
-                return;
-            }
+    useEffect(() => {
+        if (!id) {
+            return;
+        }
 
-            create(id, render, properties);
+        create(id, render, properties);
 
-            return () => {
-                hide(id);
-            };
-        },
-        [id]
-    );
+        return () => {
+            hide(id);
+        };
+    }, [id]);
 
     return null;
 });
