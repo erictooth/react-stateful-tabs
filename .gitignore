@@ -5,3 +5,4 @@ coverage
 dist
 flow-coverage
 package-lock.json
+pkg
