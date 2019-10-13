@@ -1,6 +1,6 @@
 {
     "name": "react-stateful-tabs",
-    "version": "1.0.0-rc.8",
+    "version": "1.0.0",
     "description": "Preserve the internal state of a component when it’s hidden.",
     "author": "Eric Mantooth",
     "license": "MIT",
@@ -23,7 +23,8 @@
         "build:pika": "pika build",
         "lint": "eslint src --ext=ts,tsx",
         "prepublishOnly": "npm-run-all build",
-        "storybook": "start-storybook"
+        "storybook": "start-storybook",
+        "test": ""
     },
     "devDependencies": {
         "@erictooth/eslint-config": "^1.1.4",
