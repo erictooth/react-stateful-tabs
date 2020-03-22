@@ -1,5 +1,7 @@
 <img src='https://github.com/erictooth/react-stateful-tabs/raw/master/media/react-stateful-tabs.png' height='75' width='403' alt='React Stateful Tabs' />
 
+Preserve the internal state of a component when it’s hidden.
+
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/erictooth/react-stateful-tabs/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/react-stateful-tabs.svg?style=flat-square)](https://www.npmjs.com/package/react-stateful-tabs) ![test coverage](https://img.shields.io/badge/coverage-0%25-red.svg?style=flat-square) ![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square) ![bundle size](https://badgen.net/bundlephobia/minzip/react-stateful-tabs@latest)
 
 
