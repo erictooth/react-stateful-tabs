@@ -51,6 +51,13 @@ export const Provider = <T extends {}>(props: Props) => {
         [dispatch]
     );
 
+    const move = React.useCallback(
+        (prevId: InstanceIdentifier, newId: InstanceIdentifier) => {
+            dispatch({ type: "MOVE", prevId, newId });
+        },
+        [dispatch]
+    );
+
     const contextValue: StatefulTabsContextType = React.useMemo(
         () => ({
             ...deepState,
@@ -59,8 +66,9 @@ export const Provider = <T extends {}>(props: Props) => {
             hide,
             show,
             update,
+            move,
         }),
-        [deepState, create, destroy, hide, show, update]
+        [deepState, create, destroy, hide, show, update, move]
     );
 
     return (

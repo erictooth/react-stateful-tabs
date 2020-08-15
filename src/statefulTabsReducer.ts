@@ -26,7 +26,8 @@ export type Actions<T> =
           properties: InstancePropertiesUpdater<T>;
       }
     | { type: "HIDE"; id: InstanceIdentifier }
-    | { type: "SHOW"; id: InstanceIdentifier };
+    | { type: "SHOW"; id: InstanceIdentifier }
+    | { type: "MOVE"; prevId: InstanceIdentifier; newId: InstanceIdentifier };
 
 export const DEFAULT_STATE: State<any> = {
     instances: {},
@@ -93,6 +94,21 @@ const instancesReducer = <T>(
                 },
             };
         }
+        case "MOVE": {
+            if (!Object.prototype.hasOwnProperty.call(state, action.prevId)) {
+                return state;
+            }
+
+            const properties = state[action.prevId];
+
+            const nextState = { ...state };
+            delete nextState[action.prevId];
+
+            return {
+                ...nextState,
+                [action.newId]: properties,
+            };
+        }
 
         default:
             return state;
@@ -110,6 +126,11 @@ const activeInstanceReducer = <T>(
         case "DESTROY":
         case "HIDE":
             if (action.id === state) {
+                return null;
+            }
+            return state;
+        case "MOVE":
+            if (action.prevId === state) {
                 return null;
             }
             return state;
