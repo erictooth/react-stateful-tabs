@@ -66,10 +66,6 @@ const instancesReducer = <T>(
             }
             const instance = state[action.id];
 
-            if (typeof action.properties === "object") {
-                console.log(action.properties);
-            }
-
             const nextProperties = (() => {
                 if (typeof action.properties === "function") {
                     // https://github.com/microsoft/TypeScript/issues/27422
