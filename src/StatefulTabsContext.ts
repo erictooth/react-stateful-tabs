@@ -12,6 +12,7 @@ export type StatefulTabsContextType = State<any> & {
     show: (id: InstanceIdentifier) => void;
     destroy: (id: InstanceIdentifier) => void;
     update: (id: InstanceIdentifier, properties: InstanceProperties<any>) => void;
+    move: (prevId: InstanceIdentifier, newId: InstanceIdentifier) => void;
 };
 
 const DEFAULT_CONTEXT = null;
