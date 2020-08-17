@@ -4,7 +4,7 @@ import { InstanceIdentifier } from "./StatefulTabs.type";
 import { useMemoizedMap } from "./useMemoizedMap";
 
 export const View = React.memo(() => {
-    const { activeInstance, instances, destroy, update } = useStatefulTabsContext();
+    const { activeInstance, instances, destroy, update, move } = useStatefulTabsContext();
 
     const instanceProps = useMemoizedMap(
         (id) => ({
@@ -13,6 +13,9 @@ export const View = React.memo(() => {
             },
             update: (properties) => {
                 update(id, properties);
+            },
+            move: (newId: InstanceIdentifier) => {
+                move(id, newId);
             },
         }),
         Object.keys(instances)

@@ -69,7 +69,7 @@ const instancesReducer = <T>(
             const nextProperties = (() => {
                 if (typeof action.properties === "function") {
                     // https://github.com/microsoft/TypeScript/issues/27422
-                    const updater = action.properties as ((previousProperties: T) => T);
+                    const updater = action.properties as (previousProperties: T) => T;
                     return updater(instance.properties);
                 }
 
