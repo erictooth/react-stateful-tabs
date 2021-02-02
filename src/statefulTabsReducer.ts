@@ -7,6 +7,8 @@ import {
     InstancePropertiesUpdater,
 } from "./StatefulTabs.type";
 
+import { nanoid } from "nanoid/non-secure";
+
 export type State<T> = {
     instances: Record<InstanceIdentifier, Instance<T>>;
     activeInstance: ActiveInstance;
@@ -48,6 +50,7 @@ const instancesReducer = <T>(
                 [action.id]: {
                     render: action.render,
                     properties: action.properties,
+                    key: nanoid(),
                 },
             };
         case "DESTROY": {

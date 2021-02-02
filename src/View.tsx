@@ -32,7 +32,9 @@ export const View = React.memo(() => {
     return (
         <>
             {Object.entries(instances).map(([id, instance]) =>
-                React.cloneElement(instance.render(getInstanceProps(id)), { key: id })
+                React.cloneElement(instance.render(getInstanceProps(id)), {
+                    key: instances[id].key,
+                })
             )}
         </>
     );

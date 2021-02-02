@@ -13,6 +13,7 @@ export type InstancePropertiesUpdater<T> =
 export type Instance<T> = {
     render: InstanceRender<T>;
     properties: InstanceProperties<T>;
+    key: string;
 };
 
 export type InstanceRenderProps<T> = {
