@@ -39,7 +39,7 @@
         "typescript": "^3.6.2"
     },
     "peerDependencies": {
-        "react": "^16.8.0"
+        "react": ">=16.8.0"
     },
     "prettier": "@erictooth/prettier-config",
     "eslintConfig": {
