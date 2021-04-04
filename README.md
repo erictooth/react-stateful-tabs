@@ -2,7 +2,7 @@
 
 Preserve the internal state of a component when it’s hidden.
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/erictooth/react-stateful-tabs/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/react-stateful-tabs.svg?style=flat-square)](https://www.npmjs.com/package/react-stateful-tabs) ![test coverage](https://img.shields.io/badge/coverage-0%25-red.svg?style=flat-square) ![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square) ![bundle size](https://badgen.net/bundlephobia/minzip/react-stateful-tabs@latest)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/erictooth/react-stateful-tabs/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/react-stateful-tabs.svg?style=flat-square)](https://www.npmjs.com/package/react-stateful-tabs) ![test coverage](https://img.shields.io/badge/coverage-81%25-green.svg?style=flat-square) ![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square) ![bundle size](https://badgen.net/bundlephobia/minzip/react-stateful-tabs@latest)
 
 
 Try the other libaries in the series! [React Use Pagination](https://github.com/erictooth/react-use-pagination), [React Smart Promise](https://github.com/erictooth/react-smart-promise), [React Accessible Form](https://github.com/erictooth/react-accessible-form)
