@@ -8,7 +8,7 @@ type Props = {
     children: React.ReactNode;
 };
 
-export const Provider = <T extends {}>(props: Props) => {
+export const Provider = <T extends unknown>(props: Props) => {
     const { children } = props;
     const [state, dispatch] = React.useReducer(statefulTabsReducer, DEFAULT_STATE);
 
