@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { StatefulTabsContext } from "./StatefulTabsContext";
+import { StatefulTabsContext, StatefulTabsContextType } from "./StatefulTabsContext";
 
-export const useStatefulTabsContext = () => {
+export const useStatefulTabsContext = (): StatefulTabsContextType => {
     const ctx = useContext(StatefulTabsContext);
 
     if (!ctx) {

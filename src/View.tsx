@@ -3,7 +3,7 @@ import { useStatefulTabsContext } from "./useStatefulTabsContext";
 import { InstanceIdentifier } from "./StatefulTabs.type";
 import { useMemoizedMap } from "./useMemoizedMap";
 
-export const View = React.memo(() => {
+const View = React.memo(() => {
     const { activeInstance, instances, destroy, update, move } = useStatefulTabsContext();
 
     const instanceProps = useMemoizedMap(
@@ -39,3 +39,7 @@ export const View = React.memo(() => {
         </>
     );
 });
+
+View.displayName = "StatefulTabs.View";
+
+export { View };

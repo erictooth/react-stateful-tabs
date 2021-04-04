@@ -10,7 +10,7 @@ type Props<T> = {
     properties?: InstanceProperties<T>;
 };
 
-export const Controller = <T extends unknown>(props: Props<T>) => {
+export const Controller = <T extends unknown>(props: Props<T>): null => {
     const { id, render, properties = {} } = props;
     const { create, hide } = useStatefulTabsContext();
 
