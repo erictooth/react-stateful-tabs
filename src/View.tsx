@@ -23,6 +23,7 @@ const View = React.memo(() => {
 
     const getInstanceProps = (id: InstanceIdentifier) => {
         return {
+            tabKey: instances[id].key,
             visible: id === activeInstance,
             properties: instances[id].properties,
             ...instanceProps[id],
