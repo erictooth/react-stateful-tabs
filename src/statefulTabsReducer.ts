@@ -130,7 +130,7 @@ const activeInstanceReducer = <T>(
             return state;
         case "MOVE":
             if (action.prevId === state) {
-                return action.newId;
+                return null;
             }
             return state;
         default:
