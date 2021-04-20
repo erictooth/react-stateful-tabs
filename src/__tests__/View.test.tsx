@@ -29,7 +29,7 @@ it("allows the rendered component to destroy itself", () => {
     expect(destroyButton).not.toBeInTheDocument();
 });
 
-it("updates the activeInstance's id if it was moved", () => {
+it("updates the activeInstance's id to null when it's moved", () => {
     const INITIAL_ID = "1234";
     const TARGET_ID = "5678";
     const BUTTON_LABEL = "Move me";
@@ -48,5 +48,5 @@ it("updates the activeInstance's id if it was moved", () => {
     fireEvent.click(moveButton);
 
     expect(onState).toHaveBeenCalledTimes(3);
-    expect(onState.mock.calls[2][0].activeInstance).toBe(TARGET_ID);
+    expect(onState.mock.calls[2][0].activeInstance).toBe(null);
 });
