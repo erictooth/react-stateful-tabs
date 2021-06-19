@@ -12,5 +12,9 @@ const render_prop = () => <SampleTab />;
 // });
 
 it("renders without throwing an error", () => {
-    render(<Provider><Controller id="1" render={render_prop} /></Provider>)
+    render(
+        <Provider>
+            <Controller id="1" render={render_prop} />
+        </Provider>
+    );
 });
