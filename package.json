@@ -95,5 +95,11 @@
     "jest": {
         "preset": "ts-jest",
         "testEnvironment": "jsdom"
+    },
+    "release": {
+        "extends": "@erictooth/semantic-release-npm-github-config",
+        "branches": [
+            "master"
+        ]
     }
 }
