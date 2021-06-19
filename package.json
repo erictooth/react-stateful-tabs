@@ -19,17 +19,29 @@
         "router",
         "routing"
     ],
+    "source": "dist-src/index.js",
+    "types": "dist-types/index.d.ts",
+    "module": "dist-web/index.js",
+    "main": "dist-node/index.js",
+    "files": [
+        "dist-node",
+        "dist-src",
+        "dist-types",
+        "dist-web"
+    ],
     "scripts": {
-        "prebuild": "npm-run-all lint test",
-        "build": "npm-run-all build:pika",
+        "build": "npm run build:pika",
         "build:pika": "pika build",
+        "postbuild": "shx cp -r pkg/dist-* . && rm -r pkg",
         "lint": "eslint src",
         "test": "jest",
-        "prepublishOnly": "npm-run-all build"
+        "prepack": "npm run build",
+        "typecheck": "tsc --noEmit"
     },
     "devDependencies": {
         "@erictooth/eslint-config": "^3",
         "@erictooth/prettier-config": "^4",
+        "@erictooth/semantic-release-npm-github-config": "^1",
         "@pika/pack": "^0.5.0",
         "@pika/plugin-build-node": "^0.9.2",
         "@pika/plugin-build-web": "^0.9.2",
@@ -39,8 +51,9 @@
         "@types/jest": "^26",
         "eslint": "^7",
         "jest": "^27",
-        "npm-run-all": "^4",
         "prettier": "^2",
+        "semantic-release": "^17",
+        "shx": "^0.3.3",
         "ts-jest": "^27",
         "typescript": "^3"
     },
