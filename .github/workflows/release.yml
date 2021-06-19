@@ -49,7 +49,9 @@ jobs:
               run: npm run typecheck --if-present
     release:
         name: Release
-        needs: test
+        needs:
+          - test
+          - lint
         runs-on: ubuntu-latest
         steps:
             - name: Checkout
