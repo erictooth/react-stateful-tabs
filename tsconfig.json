@@ -1,5 +1,6 @@
 {
     "exclude": ["./stories/**", "**/__tests__/**"],
+    "include": ["src"],
     "compilerOptions": {
         "target": "es2019",
         "module": "esnext",
