@@ -5,6 +5,7 @@ import {
     InstanceRender,
     InstanceProperties,
     InstancePropertiesUpdater,
+    ScopeIdentifier,
 } from "./StatefulTabs.type";
 
 import { nanoid } from "nanoid/non-secure";
@@ -12,28 +13,34 @@ import { nanoid } from "nanoid/non-secure";
 export type State<T> = {
     instances: Record<InstanceIdentifier, Instance<T>>;
     activeInstance: ActiveInstance;
+    activeScopedInstances: Record<InstanceIdentifier, ActiveInstance>;
 };
 
+type ParentIdProperty = { parentId: ScopeIdentifier };
+type IdProperty = { id: InstanceIdentifier };
+
 export type Actions<T> =
-    | {
-          type: "CREATE";
-          id: InstanceIdentifier;
-          render: InstanceRender<T>;
-          properties: InstanceProperties<T>;
-      }
-    | { type: "DESTROY"; id: InstanceIdentifier }
-    | {
-          type: "UPDATE";
-          id: InstanceIdentifier;
-          properties: InstancePropertiesUpdater<T>;
-      }
-    | { type: "HIDE"; id: InstanceIdentifier }
-    | { type: "SHOW"; id: InstanceIdentifier }
+    | (IdProperty &
+          (
+              | (ParentIdProperty & {
+                    type: "CREATE";
+                    render: InstanceRender<T>;
+                    properties: InstanceProperties<T>;
+                })
+              | { type: "DESTROY" }
+              | {
+                    type: "UPDATE";
+                    properties: InstancePropertiesUpdater<T>;
+                }
+              | { type: "HIDE" }
+              | { type: "SHOW" }
+          ))
     | { type: "MOVE"; prevId: InstanceIdentifier; newId: InstanceIdentifier };
 
 export const DEFAULT_STATE: State<any> = {
     instances: {},
     activeInstance: null,
+    activeScopedInstances: {},
 };
 
 const instancesReducer = <T>(
@@ -51,6 +58,7 @@ const instancesReducer = <T>(
                     render: action.render,
                     properties: action.properties,
                     key: nanoid(),
+                    parentId: action.parentId || null,
                 },
             };
         case "DESTROY": {
@@ -116,23 +124,73 @@ const instancesReducer = <T>(
 
 const activeInstanceReducer = <T>(
     state: State<T>["activeInstance"] = DEFAULT_STATE.activeInstance,
-    action: Actions<T>
+    action: Actions<T>,
+    parentId: ScopeIdentifier
 ): State<T>["activeInstance"] => {
+    if (parentId) {
+        return state;
+    }
     switch (action.type) {
         case "CREATE":
-        case "SHOW":
+        case "SHOW": {
             return action.id;
+        }
         case "DESTROY":
-        case "HIDE":
+        case "HIDE": {
             if (action.id === state) {
                 return null;
             }
             return state;
-        case "MOVE":
+        }
+        case "MOVE": {
             if (action.prevId === state) {
                 return null;
             }
             return state;
+        }
+        default:
+            return state;
+    }
+};
+
+const activeScopedInstancesReducer = <T>(
+    state: State<T>["activeScopedInstances"] = DEFAULT_STATE.activeScopedInstances,
+    action: Actions<T>,
+    parentId: ScopeIdentifier
+): State<T>["activeScopedInstances"] => {
+    if (!parentId) {
+        return state;
+    }
+    switch (action.type) {
+        case "CREATE":
+        case "SHOW": {
+            if (state[parentId] === action.id) {
+                return state;
+            }
+            return {
+                ...state,
+                [parentId]: action.id,
+            };
+        }
+        case "DESTROY":
+        case "HIDE": {
+            if (state[parentId] === action.id) {
+                return state;
+            }
+            return {
+                ...state,
+                [parentId]: null,
+            };
+        }
+        case "MOVE": {
+            if (state[parentId] !== action.prevId) {
+                return state;
+            }
+            return {
+                ...state,
+                [parentId]: action.newId,
+            };
+        }
         default:
             return state;
     }
@@ -141,7 +199,16 @@ const activeInstanceReducer = <T>(
 export const statefulTabsReducer = <T>(
     state: State<T> = DEFAULT_STATE,
     action: Actions<T>
-): State<T> => ({
-    instances: instancesReducer<T>(state.instances, action),
-    activeInstance: activeInstanceReducer<T>(state.activeInstance, action),
-});
+): State<T> => {
+    //@ts-ignore
+    const parentId = action.parentId || (action.id && state.instances[action.id]?.parentId);
+    return {
+        instances: instancesReducer<T>(state.instances, action),
+        activeInstance: activeInstanceReducer<T>(state.activeInstance, action, parentId),
+        activeScopedInstances: activeScopedInstancesReducer(
+            state.activeScopedInstances,
+            action,
+            parentId
+        ),
+    };
+};

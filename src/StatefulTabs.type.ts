@@ -1,6 +1,7 @@
 export type InstanceIdentifier = string;
 
 export type ActiveInstance = InstanceIdentifier | null;
+export type ScopeIdentifier = InstanceIdentifier | null;
 
 export type InstanceProperties<T> = T;
 
@@ -14,6 +15,7 @@ export type Instance<T> = {
     render: InstanceRender<T>;
     properties: InstanceProperties<T>;
     key: string;
+    parentId: InstanceIdentifier | null;
 };
 
 export type InstanceRenderProps<T> = {

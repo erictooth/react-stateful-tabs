@@ -1,12 +1,18 @@
 import { createContext } from "react";
-import { InstanceRender, InstanceIdentifier, InstanceProperties } from "./StatefulTabs.type";
+import {
+    InstanceRender,
+    InstanceIdentifier,
+    InstanceProperties,
+    ScopeIdentifier,
+} from "./StatefulTabs.type";
 import { State } from "./statefulTabsReducer";
 
 export type StatefulTabsContextType = State<any> & {
     create: (
         id: InstanceIdentifier,
         render: InstanceRender<any>,
-        properties: InstanceProperties<any>
+        properties: InstanceProperties<any>,
+        parentId: ScopeIdentifier
     ) => void;
     hide: (id: InstanceIdentifier) => void;
     show: (id: InstanceIdentifier) => void;

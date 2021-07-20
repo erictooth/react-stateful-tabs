@@ -1,10 +1,21 @@
 import * as React from "react";
 import { useStatefulTabsContext } from "./useStatefulTabsContext";
-import { InstanceIdentifier } from "./StatefulTabs.type";
+import { InstanceIdentifier, Instance, ScopeIdentifier } from "./StatefulTabs.type";
 import { useMemoizedMap } from "./useMemoizedMap";
+import { ParentIdContext, useParentId } from "./ParentIdContext";
+
+const byParentInstance =
+    (parentId: ScopeIdentifier) =>
+    ([, instance]: [InstanceIdentifier, Instance<any>]): boolean => {
+        return parentId === instance.parentId;
+    };
 
 const View = React.memo(() => {
-    const { activeInstance, instances, destroy, update, move } = useStatefulTabsContext();
+    const { activeInstance, activeScopedInstances, instances, destroy, update, move } =
+        useStatefulTabsContext();
+
+    const parentId = useParentId();
+    const activeId = parentId ? activeScopedInstances[parentId] : activeInstance;
 
     const instanceProps = useMemoizedMap(
         (id) => ({
@@ -24,20 +35,22 @@ const View = React.memo(() => {
     const getInstanceProps = (id: InstanceIdentifier) => {
         return {
             tabKey: instances[id].key,
-            visible: id === activeInstance,
+            visible: activeId === id,
             properties: instances[id].properties,
             ...instanceProps[id],
         };
     };
 
     return (
-        <>
-            {Object.entries(instances).map(([id, instance]) =>
-                React.cloneElement(instance.render(getInstanceProps(id)), {
-                    key: instances[id].key,
-                })
-            )}
-        </>
+        <ParentIdContext.Provider value={parentId || activeInstance}>
+            {Object.entries(instances)
+                .filter(byParentInstance(parentId))
+                .map(([id, instance]) =>
+                    React.cloneElement(instance.render(getInstanceProps(id)), {
+                        key: instances[id].key,
+                    })
+                )}
+        </ParentIdContext.Provider>
     );
 });
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InstanceIdentifier } from "./StatefulTabs.type";
+import { InstanceIdentifier, ScopeIdentifier } from "./StatefulTabs.type";
 import { statefulTabsReducer, DEFAULT_STATE } from "./statefulTabsReducer";
 import { StatefulTabsContext, StatefulTabsContextType } from "./StatefulTabsContext";
 import { useDeepMemo } from "./utils";
@@ -17,8 +17,8 @@ export const Provider = <T extends unknown>(props: Props): React.ReactElement =>
     const deepState = useDeepMemo(state);
 
     const create = React.useCallback(
-        (id: InstanceIdentifier, render, properties: Partial<T> = {}) => {
-            dispatch({ type: "CREATE", id, render, properties });
+        (id: InstanceIdentifier, render, properties: Partial<T> = {}, parentId: ScopeIdentifier) => {
+            dispatch({ type: "CREATE", id, render, properties, parentId });
         },
         [dispatch]
     );
