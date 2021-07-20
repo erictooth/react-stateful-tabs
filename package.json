@@ -1,6 +1,6 @@
 {
     "name": "react-stateful-tabs",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "description": "Preserve the internal state of a component when it's hidden.",
     "author": "erictooth",
     "license": "MIT",
